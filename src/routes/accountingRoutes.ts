@@ -1,0 +1,15 @@
+import express from 'express';
+import * as acct from '../services/accountingService';
+
+export const accountingRouter = express.Router();
+
+accountingRouter.get('/companies', acct.listCompanies);
+accountingRouter.post('/companies', acct.createCompany);
+
+accountingRouter.get('/accounts', acct.listAccounts);
+accountingRouter.post('/accounts', acct.createAccount);
+
+accountingRouter.get('/vouchers', acct.listVouchers);
+accountingRouter.post('/vouchers', acct.createVoucher);
+
+accountingRouter.get('/reports/trial-balance', acct.trialBalance);
