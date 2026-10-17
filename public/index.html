@@ -1,42 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accounting Notes</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Enterprise accounting</p>
-          <h1>Accounting Notes</h1>
-        </div>
-        <button class="primary-button">+ New Voucher</button>
-      </header>
+import express from 'express';
+import * as acct from '../services/accountingService';
 
-      <main class="content">
-        <section class="stats-grid" id="statsGrid"></section>
+export const accountingRouter = express.Router();
 
-        <section class="panel">
-          <div class="panel-header">
-            <h2>Accounts</h2>
-            <button class="secondary-button">Add Account</button>
-          </div>
-          <div id="accountsTable" class="table"></div>
-        </section>
-
-        <section class="panel">
-          <div class="panel-header">
-            <h2>Recent Vouchers</h2>
-            <button class="secondary-button">View All</button>
-          </div>
-          <div id="vouchersTable" class="table"></div>
-        </section>
-      </main>
-    </div>
-
-    <script src="/app.js"></script>
-  </body>
-</html>
+accountingRouter.get('/dashboard', acct.dashboard);
+accountingRouter.get('/companies', acct.listCompanies);
+accountingRouter.post('/companies', acct.createCompany);
+accountingRouter.get('/accounts', acct.listAccounts);
+accountingRouter.post('/accounts', acct.createAccount);
+accountingRouter.get('/vouchers', acct.listVouchers);
+accountingRouter.post('/vouchers', acct.createVoucher);
+accountingRouter.get('/reports/trial-balance', acct.trialBalance);
